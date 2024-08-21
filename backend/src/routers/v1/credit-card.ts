@@ -9,11 +9,16 @@ export async function creditCardRoutes(fastify: FastifyInstance) {
   fastify.post('/credit-card', async (request, reply) => {
     const { cardNumber } = request.body as ICreditCardParams;
 
-    if (!luhnChecksum(cardNumber)) {
+    try {
+      if (!luhnChecksum(cardNumber)) {
+        reply.code(400);
+        return { errors: [{ code: 'credit-card/card-is-invalid' }] };
+      }
+  
+      return {};
+    } catch (error) {
       reply.code(400);
-      return { message: 'Invalid credit card number' };
+      return { errors: [{ code: 'credit-card/invalid-characters' }] };
     }
-
-    return { message: 'Credit card number is valid' };
   });
 }
