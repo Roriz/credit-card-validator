@@ -8,7 +8,9 @@ fastify.register(cors, {
   methods: ["GET", "POST", "PUT", "DELETE"],
 });
 
-fastify.listen({ port: 3001 }, (err, address) => {
+const port = Number(process.env.PORT) || 3000;
+
+fastify.listen({ port, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);

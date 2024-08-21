@@ -3,4 +3,8 @@ import { creditCardRoutes } from "./v1/credit-card";
 
 export default async function registerRoutes(fastify: FastifyInstance) {
   fastify.register(creditCardRoutes, { prefix: "/v1" });
+
+  fastify.get("/", () => {
+    return {};
+  });
 }

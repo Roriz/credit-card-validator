@@ -14,3 +14,8 @@ Just practice repository for learning purposes.
 ## Minimal UI Requirements:
 ● At least one text box should be included for credit card input
 ● Screen should display if the number is valid or not
+
+## How to run the project
+1. Clone the repository
+2. Run `docker-compose up` to start the server
+3. Go to `http://localhost:3000` to view the application
