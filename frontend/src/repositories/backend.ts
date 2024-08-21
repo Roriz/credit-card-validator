@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BACKEND_URL = 'http://localhost:3001/v1';
+const BACKEND_URL = "http://localhost:3001/v1";
 
 export async function validateCreditCard(cardNumber: string): Promise<Boolean> {
   try {
@@ -10,4 +10,4 @@ export async function validateCreditCard(cardNumber: string): Promise<Boolean> {
   } catch (error) {
     return false;
   }
-};
+}
