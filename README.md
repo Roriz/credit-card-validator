@@ -1,5 +1,4 @@
 # Simple Credit Card Validator
-
 This is a simple credit card validator that checks if a credit card number is valid or not. It uses the Luhn algorithm to validate the credit card number.
 Just practice repository for learning purposes.
 
