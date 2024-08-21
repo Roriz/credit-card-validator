@@ -1,10 +1,9 @@
 import Fastify from 'fastify';
+import routes from './routers/index';
 
 const fastify = Fastify({ logger: true });
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' };
-});
+fastify.register(routes);
 
 fastify.listen({ port: 3001 }, (err, address) => {
   if (err) {
