@@ -1,8 +1,14 @@
+import cors from '@fastify/cors';
 import { buildFastify } from './app';
 
 const fastify = buildFastify();
 
-fastify.listen({ port: 3000 }, (err, address) => {
+fastify.register(cors, {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+});
+
+fastify.listen({ port: 3001 }, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import './credit-card-form.css';
 
+import { validateCreditCard } from '../../repositories/backend';
+
 const CreditCardForm: React.FC = () => {
   const [cardNumber, setCardNumber] = useState('');
-  const [feedback, setFeedback] = useState('');
+  const [cardNumberValid, setCardNumberValid] = useState<Boolean | undefined>(undefined);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const valid = await validateCreditCard(cardNumber);
+    setCardNumberValid(valid)
     setCardNumber('');
-    setFeedback('Mocked API call successful');
+  };
+  
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardNumber(e.target.value)
+    setCardNumberValid(undefined)
   };
 
   return (
@@ -20,7 +28,7 @@ const CreditCardForm: React.FC = () => {
             type="text"
             id="cardNumber"
             value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={handleCardNumberChange}
             required
           />
         </div>
@@ -28,7 +36,11 @@ const CreditCardForm: React.FC = () => {
         <button type="submit">Submit</button>
       </form>
 
-      {feedback && <p>{feedback}</p>}
+      {cardNumberValid !== undefined && (
+        <div>
+          {cardNumberValid ? 'Card number is valid' : 'Card number is invalid'}
+        </div>
+      )}
     </div>
   );
 }
