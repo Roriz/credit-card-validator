@@ -20,24 +20,30 @@ const CreditCardForm: React.FC = () => {
   };
 
   return (
-    <div className="CreditCardForm">
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="credit-card-form">
+      <form onSubmit={handleSubmit} data-testid="credit-card-form">
+        <div className="credit-card-form__inline">
           <label htmlFor="cardNumber">Card Number:</label>
           <input
             type="text"
             id="cardNumber"
             value={cardNumber}
             onChange={handleCardNumberChange}
+            data-testid="card-number"
             required
           />
         </div>
-
-        <button type="submit">Submit</button>
+        
+        <div className="credit-card-form__inline">
+          <button type="submit">Submit</button>
+        </div>
       </form>
 
       {cardNumberValid !== undefined && (
-        <div>
+        <div
+          className={`credit-card-form__feedback ${cardNumberValid ? 'valid' : 'invalid'}`}
+          data-testid="feedback"
+        >
           {cardNumberValid ? 'Card number is valid' : 'Card number is invalid'}
         </div>
       )}
