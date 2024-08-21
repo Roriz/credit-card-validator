@@ -23,7 +23,6 @@ const CreditCardForm: React.FC = () => {
       setCardNumberValid(false);
       setError('An unexpected error occurred');
     }
-    setCardNumber('');
   };
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {

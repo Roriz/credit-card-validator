@@ -19,3 +19,8 @@ Just practice repository for learning purposes.
 1. Clone the repository
 2. Run `docker-compose up` to start the server
 3. Go to `http://localhost:3000` to view the application
+
+## Preview
+![image](success-preview.png)
+![image](error-preview.png)
+![image](unexpected-preview.png)
