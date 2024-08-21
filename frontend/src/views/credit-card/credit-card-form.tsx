@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import "./credit-card-form.css";
+import React, { useState } from 'react';
+import './credit-card-form.css';
 
-import { validateCreditCard } from "../../repositories/backend";
+import { validateCreditCard } from '../../repositories/backend';
 
 const CreditCardForm: React.FC = () => {
-  const [cardNumber, setCardNumber] = useState("");
+  const [cardNumber, setCardNumber] = useState('');
+  const [error, setError] = useState<string>('');
   const [cardNumberValid, setCardNumberValid] = useState<Boolean | undefined>(
-    undefined,
+    undefined
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const valid = await validateCreditCard(cardNumber);
-    setCardNumberValid(valid);
-    setCardNumber("");
+    setError('');
+    try {
+      const valid = await validateCreditCard(cardNumber);
+      setCardNumberValid(valid);
+      if (!valid) {
+        setError('Card number is invalid');
+      }
+    } catch {
+      setCardNumberValid(false);
+      setError('An unexpected error occurred');
+    }
+    setCardNumber('');
   };
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,10 +53,10 @@ const CreditCardForm: React.FC = () => {
 
       {cardNumberValid !== undefined && (
         <div
-          className={`credit-card-form__feedback ${cardNumberValid ? "valid" : "invalid"}`}
+          className={`credit-card-form__feedback ${cardNumberValid ? 'valid' : 'invalid'}`}
           data-testid="feedback"
         >
-          {cardNumberValid ? "Card number is valid" : "Card number is invalid"}
+          {cardNumberValid ? 'Card number is valid' : error}
         </div>
       )}
     </div>
