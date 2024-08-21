@@ -1,13 +1,13 @@
 import { FastifyInstance } from 'fastify';
-import { luhnChecksum } from '../lib/luhn-checksum';
+import { luhnChecksum } from '../../lib/luhn-checksum';
 
-interface CreditCardParams {
+interface ICreditCardParams {
   cardNumber: string;
 }
 
 export async function creditCardRoutes(fastify: FastifyInstance) {
   fastify.post('/credit-card', async (request, reply) => {
-    const { cardNumber } = request.body as CreditCardParams;
+    const { cardNumber } = request.body as ICreditCardParams;
 
     if (!luhnChecksum(cardNumber)) {
       reply.code(400);
